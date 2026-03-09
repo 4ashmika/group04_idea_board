@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Idea Board</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Importing a modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="counter-badge" id="total-counter">Total: 0</div>
+            <h1><i data-lucide="lightbulb"></i> Group Idea Board</h1>
+        </header>
+        
+        <div class="content">
+            <div class="input-section">
+                <div class="form-row">
+                    <select id="user-select">
+                        <option value="" disabled selected>Who are you?</option>
+                        <option value="Rashmika">Rashmika</option>
+                        <option value="Pasindu">Pasindu</option>
+                        <option value="Inoosha">Inoosha</option>
+                        <option value="Dhanuka">Dhanuka</option>
+                        <option value="Dansten">Dansten</option>
+                        <option value="Romeena">Romeena</option>
+                        <option value="Sachini">Sachini</option>
+                        <option value="Osada">Osada</option>
+                        <option value="Arshad">Arshad</option>
+                    </select>
+                    <input type="text" id="idea-input" placeholder="What's your brilliant idea?" autocomplete="off">
+                </div>
+                <div class="button-group">
+                    <button id="add-idea-btn" class="btn-primary">
+                        <i data-lucide="plus-circle"></i> Add Idea
+                    </button>
+                    <button id="reset-btn" class="btn-secondary">
+                        <i data-lucide="rotate-ccw"></i> Reset Form
+                    </button>
+                </div>
+            </div>
+
+            <div class="list-header">
+                <i data-lucide="list"></i> Recent Suggestions
+            </div>
+
+            <div class="list-wrapper">
+                <ul id="idea-list">
+                    <div class="empty-state" id="empty-state">
+                        <i data-lucide="inbox"></i>
+                        <p>No ideas yet. Start the conversation!</p>
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            &copy; 2026 Group04 &bull; Designed for Collaboration
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
