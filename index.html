@@ -3,63 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Group Idea Board</title>
+    <title>Student Toolkit</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Importing a modern font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="counter-badge" id="total-counter">Total: 0</div>
-            <h1><i data-lucide="lightbulb"></i> Group Idea Board</h1>
+            <div class="header-left">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjh8HCAzjZbfXikaInHueqXzhxl9UzKtQhWw&s" alt="UCSC Logo" class="ucsc-logo">
+                <h1>Student Toolkit</h1>
+            </div>
+            
+            <nav class="main-app-nav">
+                <button id="nav-idea-board" class="active">Idea Board</button>
+                <button id="nav-gpa-calc">GPA Calculator</button>
+                <button id="nav-study-timer">Study Timer</button>
+            </nav>
+
+            <div class="dark-mode-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="dark-mode-checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <span class="toggle-label"><i data-lucide="moon"></i></span>
+            </div>
+            
+            <div class="counter-badge" id="total-counter">Total Ideas: 0</div>
         </header>
-        
-        <div class="content">
-            <div class="input-section">
-                <div class="form-row">
-                    <select id="user-select">
-                        <option value="" disabled selected>Who are you?</option>
-                        <option value="Rashmika">Rashmika</option>
-                        <option value="Pasindu">Pasindu</option>
-                        <option value="Inoosha">Inoosha</option>
-                        <option value="Dhanuka">Dhanuka</option>
-                        <option value="Dansten">Dansten</option>
-                        <option value="Romeena">Romeena</option>
-                        <option value="Sachini">Sachini</option>
-                        <option value="Osada">Osada</option>
-                        <option value="Arshad">Arshad</option>
-                    </select>
-                    <input type="text" id="idea-input" placeholder="What's your brilliant idea?" autocomplete="off">
-                </div>
-                <div class="button-group">
-                    <button id="add-idea-btn" class="btn-primary">
-                        <i data-lucide="plus-circle"></i> Add Idea
-                    </button>
-                    <button id="reset-btn" class="btn-secondary">
-                        <i data-lucide="rotate-ccw"></i> Reset Form
-                    </button>
-                </div>
-            </div>
 
-            <div class="list-header">
-                <i data-lucide="list"></i> Recent Suggestions
-            </div>
-
-            <div class="list-wrapper">
-                <ul id="idea-list">
-                    <div class="empty-state" id="empty-state">
-                        <i data-lucide="inbox"></i>
-                        <p>No ideas yet. Start the conversation!</p>
-                    </div>
+        <div class="toolkit-layout">
+            <aside class="sidebar">
+                <h3>Upcoming Events</h3>
+                <ul class="event-list">
+                    <li><i data-lucide="calendar"></i> Mid-term Exams - Oct 15</li>
+                    <li><i data-lucide="calendar"></i> Project Submission - Oct 20</li>
+                    <li><i data-lucide="calendar"></i> Workshop: AI Trends - Oct 25</li>
+                    <li><i data-lucide="calendar"></i> Hackathon 2026 - Nov 05</li>
                 </ul>
-            </div>
+            </aside>
+
+            <main class="toolkit-main">
+                <!-- Idea Board Section -->
+                <div class="content" id="idea-board-content">
+                    <div class="input-section">
+                        <div class="form-row">
+                            <select id="user-select">
+                                <option value="" disabled selected>Who are you?</option>
+                                <option value="Rashmika">Rashmika</option>
+                                <option value="Pasindu">Pasindu</option>
+                                <option value="Inoosha">Inoosha</option>
+                                <option value="Dhanuka">Dhanuka</option>
+                                <option value="Dansten">Dansten</option>
+                                <option value="Romeena">Romeena</option>
+                                <option value="Sachini">Sachini</option>
+                                <option value="Osada">Osada</option>
+                                <option value="Arshad">Arshad</option>
+                            </select>
+                            <input type="text" id="idea-input" placeholder="What's your brilliant idea?" autocomplete="off">
+                        </div>
+                        <div class="button-group">
+                            <button id="add-idea-btn" class="btn-primary">
+                                <i data-lucide="plus-circle"></i> Add Idea
+                            </button>
+                            <button id="reset-btn" class="btn-secondary">
+                                <i data-lucide="rotate-ccw"></i> Reset Form
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="list-header">
+                        <i data-lucide="list"></i> Recent Suggestions
+                    </div>
+
+                    <div class="list-wrapper">
+                        <div class="empty-state" id="empty-state">
+                            <i data-lucide="inbox"></i>
+                            <p>No ideas yet. Start the conversation!</p>
+                        </div>
+                        <ul id="idea-list"></ul>
+                    </div>
+                </div>
+
+                <!-- GPA Calculator Section -->
+                <div id="gpa-calc-section" class="toolkit-tool" style="display: none;">
+                    <h2>GPA Calculator</h2>
+                    <p style="margin-bottom: 20px; font-size: 13px; color: var(--text-muted);">Enter your subjects and grades (A+, A, A-, B+, B, B-, etc.). Standard university weights will be applied.</p>
+                    <div class="gpa-inputs">
+                        <div class="gpa-row">
+                            <input type="text" placeholder="Subject (e.g. English)" class="subject-input">
+                            <input type="text" placeholder="Grade (e.g. A)" class="grade-input">
+                        </div>
+                        <div class="gpa-row">
+                            <input type="text" placeholder="Subject" class="subject-input">
+                            <input type="text" placeholder="Grade" class="grade-input">
+                        </div>
+                        <div id="additional-gpa-rows"></div>
+                    </div>
+                    <div class="button-group">
+                        <button id="calculate-gpa-btn" class="btn-primary">
+                            <i data-lucide="calculator"></i> Calculate GPA
+                        </button>
+                        <button id="add-gpa-row-btn" class="btn-secondary">
+                            <i data-lucide="plus"></i> Add Subject
+                        </button>
+                    </div>
+                    <div id="gpa-result" class="result-display">GPA: --</div>
+                </div>
+
+                <!-- Study Timer Section -->
+                <div id="study-timer-section" class="toolkit-tool" style="display: none;">
+                    <h2>Study Timer</h2>
+                    <div class="timer-display" id="timer-display">25:00</div>
+                    <div class="button-group">
+                        <button id="start-timer-btn" class="btn-primary">Start</button>
+                        <button id="reset-timer-btn" class="btn-secondary">Reset</button>
+                    </div>
+                </div>
+            </main>
         </div>
 
         <footer>
-            &copy; 2026 Group04 &bull; Designed for Collaboration
+            &copy; 2026 UOC-UCSC Student Toolkit &bull; Designed for Future Leaders
         </footer>
     </div>
     <script src="script.js"></script>
