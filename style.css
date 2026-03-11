@@ -47,18 +47,19 @@ body {
         radial-gradient(circle at 90% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 40%);
     background-attachment: fixed;
     color: var(--text-main);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    padding: 20px;
     transition: background 0.5s ease, color 0.5s ease;
 }
 
 .container {
-    width: 95%;
+    width: 100%;
     max-width: 1100px;
     height: 90vh;
+    min-height: 600px;
     display: flex;
     flex-direction: column;
     background: var(--glass-bg);
@@ -73,10 +74,12 @@ body {
 }
 
 header {
-    padding: 15px 40px;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
     border-bottom: 1px solid var(--glass-border);
     background: rgba(255, 255, 255, 0.05);
 }
@@ -84,11 +87,11 @@ header {
 .header-left {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 .ucsc-logo {
-    height: 40px;
+    height: 35px;
     width: auto;
     border-radius: 8px;
     background: white;
@@ -97,7 +100,7 @@ header {
 }
 
 header h1 {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 800;
     color: var(--theme-primary);
     transition: color 0.3s ease;
@@ -110,18 +113,23 @@ header h1 {
     padding: 5px;
     border-radius: 16px;
     border: 1px solid var(--glass-border);
+    order: 3;
+    width: 100%;
+    justify-content: space-around;
 }
 
 .main-app-nav button {
     background: transparent;
     border: none;
     color: var(--text-muted);
-    padding: 8px 15px;
+    padding: 8px 10px;
     border-radius: 10px;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 11px;
     cursor: pointer;
     transition: var(--transition);
+    flex: 1;
+    white-space: nowrap;
 }
 
 .main-app-nav button.active {
@@ -137,6 +145,243 @@ header h1 {
     background: rgba(0, 0, 0, 0.05);
     border-radius: 20px;
     border: 1px solid var(--glass-border);
+}
+
+/* Layout */
+.toolkit-layout { 
+    display: flex; 
+    flex-grow: 1; 
+    overflow: hidden; 
+    width: 100%;
+    flex-direction: column;
+}
+
+.sidebar {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.02);
+    border-right: none;
+    border-bottom: 1px solid var(--glass-border);
+    display: none; /* Hidden by default on mobile, can be shown if needed */
+}
+
+.toolkit-main { 
+    flex-grow: 1; 
+    overflow-y: auto; 
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+.content, .toolkit-tool { 
+    padding: 20px; 
+    animation: fadeIn 0.5s ease-out; 
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+h2 { font-size: 20px; font-weight: 800; margin-bottom: 15px; color: var(--theme-primary); }
+
+/* Idea Board Improvements */
+.input-section {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.form-row { 
+    display: flex; 
+    flex-direction: column;
+    gap: 10px; 
+    margin-bottom: 15px; 
+    width: 100%; 
+}
+
+select { width: 100%; }
+input#idea-input { width: 100%; }
+
+select, input {
+    background: var(--input-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-primary, .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: var(--theme-primary);
+    color: var(--theme-text-on-primary);
+    border: none;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1.5px solid var(--theme-primary);
+    color: var(--theme-primary);
+}
+
+.list-header {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.idea-item {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+}
+
+.idea-content {
+    width: 100%;
+}
+
+.idea-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.status-icon {
+    align-self: flex-end;
+}
+
+/* GPA Calc Specific Mobile */
+.gpa-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.gpa-row input { width: 100% !important; }
+
+/* Timer Specific Mobile */
+.timer-display {
+    font-size: 60px;
+    margin: 20px 0;
+}
+
+/* Media Queries for Desktop */
+@media (min-width: 768px) {
+    body {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .container {
+        height: 90vh;
+    }
+
+    header {
+        padding: 15px 40px;
+        flex-wrap: nowrap;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    .main-app-nav {
+        order: 2;
+        width: auto;
+        justify-content: flex-start;
+    }
+
+    .main-app-nav button {
+        padding: 8px 15px;
+        font-size: 12px;
+        flex: none;
+    }
+
+    .toolkit-layout {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        display: flex;
+        width: 250px;
+        min-width: 250px;
+        border-right: 1px solid var(--glass-border);
+        border-bottom: none;
+    }
+
+    .content, .toolkit-tool {
+        padding: 30px 40px;
+    }
+
+    h2 { font-size: 24px; }
+
+    .input-section {
+        padding: 25px;
+    }
+
+    .form-row {
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    select { width: 20%; }
+    input#idea-input { flex-grow: 1; }
+
+    .button-group {
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: auto;
+        padding: 12px 25px;
+    }
+
+    .idea-item {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .idea-meta {
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .gpa-row {
+        flex-direction: row;
+    }
+
+    .timer-display {
+        font-size: 80px;
+    }
 }
 
 .switch {
@@ -179,26 +424,6 @@ input:checked + .slider:before { transform: translateX(16px); }
     display: block;
 }
 
-/* Layout */
-.toolkit-layout { 
-    display: flex; 
-    flex-grow: 1; 
-    overflow: hidden; 
-    width: 100%;
-}
-
-.sidebar {
-    width: 250px;
-    min-width: 250px;
-    flex-shrink: 0;
-    padding: 25px 20px;
-    background: rgba(0, 0, 0, 0.02);
-    border-right: 1px solid var(--glass-border);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
 .sidebar h3 {
     font-size: 11px;
     text-transform: uppercase;
@@ -231,126 +456,6 @@ input:checked + .slider:before { transform: translateX(16px); }
 .event-list li i { color: var(--theme-primary); }
 .event-list li:hover i { color: var(--theme-text-on-primary); }
 
-.toolkit-main { 
-    flex-grow: 1; 
-    overflow-y: auto; 
-    background: transparent;
-    display: flex;
-    flex-direction: column;
-}
-
-.content, .toolkit-tool { 
-    padding: 30px 40px; 
-    animation: fadeIn 0.5s ease-out; 
-    width: 100%;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-h2 { font-size: 24px; font-weight: 800; margin-bottom: 20px; color: var(--theme-primary); }
-
-/* Idea Board Improvements */
-.input-section {
-    background: var(--card-bg);
-    padding: 25px;
-    border-radius: 20px;
-    border: 1px solid var(--glass-border);
-    margin-bottom: 30px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-    width: 100%;
-    flex-shrink: 0;
-}
-
-.form-row { display: flex; gap: 15px; margin-bottom: 20px; width: 100%; }
-
-select { width: 15%; min-width: 120px; }
-input#idea-input { flex-grow: 1; }
-
-select, input {
-    background: var(--input-bg);
-    border: 1px solid var(--glass-border);
-    color: var(--text-main);
-    border-radius: 12px;
-    padding: 15px;
-    font-size: 14px;
-    transition: var(--transition);
-}
-
-select:focus, input:focus {
-    border-color: var(--theme-primary);
-    outline: none;
-}
-
-.button-group {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-}
-
-.btn-primary {
-    background: var(--theme-primary);
-    color: var(--theme-text-on-primary);
-    border: none;
-    padding: 12px 25px;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.btn-secondary {
-    background: transparent;
-    border: 1.5px solid var(--theme-primary);
-    color: var(--theme-primary);
-    padding: 12px 25px;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.btn-secondary:hover {
-    background: var(--theme-primary);
-    color: var(--theme-text-on-primary);
-}
-
-.list-header {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--theme-primary);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding-left: 5px;
-    flex-shrink: 0;
-}
-
-.list-wrapper { 
-    flex-grow: 1; 
-    width: 100%; 
-    display: flex;
-    flex-direction: column;
-}
-#idea-list { list-style: none; display: flex; flex-direction: column; gap: 12px; width: 100%; }
-
-.idea-item {
-    background: var(--card-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 20px;
-    transition: var(--transition);
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    flex-shrink: 0;
-}
-
-.idea-item:hover { border-color: var(--theme-primary); }
-
 .empty-state {
     padding: 60px 40px;
     text-align: center;
@@ -370,7 +475,6 @@ select:focus, input:focus {
 
 .empty-state i { width: 48px; height: 48px; opacity: 0.4; color: var(--theme-primary); }
 
-/* GPA & Timer */
 .result-display {
     margin-top: 20px;
     background: var(--theme-primary);
@@ -381,15 +485,6 @@ select:focus, input:focus {
     font-weight: 800;
     text-align: center;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.timer-display {
-    font-size: 80px;
-    font-weight: 900;
-    color: var(--theme-primary);
-    text-align: center;
-    margin: 30px 0;
-    transition: color 0.3s ease;
 }
 
 body.dark-mode .timer-display {

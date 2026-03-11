@@ -60,6 +60,7 @@ const totalCounter = document.getElementById('total-counter');
 const emptyState = document.getElementById('empty-state');
 
 let ideaCount = 0;
+const addedIdeas = new Set(); // To track "userName:ideaText"
 
 function updateCounter() {
     ideaCount++;
@@ -70,14 +71,32 @@ addBtn.addEventListener('click', () => {
     const userName = userSelect.value;
     const ideaText = ideaInput.value.trim();
 
-    if (!userName || !ideaText) {
-        alert("Please select your name and share an idea!");
+    if (!userName) {
+        alert("Please select your name!");
+        return;
+    }
+    if (!ideaText) {
+        alert("Please share your idea!");
+        return;
+    }
+
+    const words = ideaText.split(/\s+/).filter(word => word.length > 0);
+    if (words.length >= 100) {
+        alert("Your idea is too long! Please keep it under 100 words.");
+        return;
+    }
+
+    const ideaKey = `${userName.toLowerCase()}:${ideaText.toLowerCase()}`;
+    if (addedIdeas.has(ideaKey)) {
+        alert("You already added this idea!");
         return;
     }
 
     if (emptyState && ideaCount === 0) {
         emptyState.style.display = 'none';
     }
+
+    addedIdeas.add(ideaKey);
 
     const now = new Date();
     const dateStr = now.toLocaleDateString();
@@ -88,10 +107,10 @@ addBtn.addEventListener('click', () => {
     listItem.className = 'idea-item';
     listItem.innerHTML = `
         <div class="idea-content">
-            <span class="idea-text clamped">${ideaText}</span>
+            <span class="idea-text clamped"></span>
             <button class="toggle-btn">See More</button>
             <div class="idea-meta">
-                <span class="suggested-by">suggested by <strong>${userName}</strong></span>
+                <span class="suggested-by">suggested by <strong></strong></span>
                 <span class="timestamp"><i data-lucide="clock"></i> ${fullDateTime}</span>
             </div>
         </div>
@@ -99,6 +118,10 @@ addBtn.addEventListener('click', () => {
             <i data-lucide="check-circle" style="color: #10b981;"></i>
         </div>
     `;
+
+    // Safely set user-provided text as plain text
+    listItem.querySelector('.idea-text').textContent = ideaText;
+    listItem.querySelector('.suggested-by strong').textContent = userName;
 
     ideaList.prepend(listItem);
     lucide.createIcons();
